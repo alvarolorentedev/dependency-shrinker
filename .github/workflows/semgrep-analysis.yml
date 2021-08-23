@@ -25,8 +25,13 @@ jobs:
       # Scan code using project's configuration on https://semgrep.dev/manage
       - uses: returntocorp/semgrep-action@v1
         with:
-          publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
-          publishDeployment: ${{ secrets.SEMGREP_DEPLOYMENT_ID }}
+          config: >- # more at semgrep.dev/explore
+            p/ci
+            p/nodejs
+            p/nodejsscan
+            p/owasp-top-ten
+            p/security-audit
+            p/secrets
           generateSarif: "1"
 
       # Upload SARIF file generated in previous step
