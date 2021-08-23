@@ -33,6 +33,7 @@ jobs:
             p/security-audit
             p/secrets
           generateSarif: "1"
+          auditOn: push
 
       # Upload SARIF file generated in previous step
       - name: Upload SARIF file
