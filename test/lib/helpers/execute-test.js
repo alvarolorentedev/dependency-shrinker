@@ -9,9 +9,11 @@ jest.mock('child_process', () => ({
 jest.mock('tree-kill', () => jest.fn())
 
 jest.useFakeTimers()
+jest.spyOn(global, 'setTimeout')
+jest.spyOn(global, 'clearTimeout')
 
 const execute = require('../../../lib/helpers/execute'),
-    faker = require('faker'),
+    { faker } = require('@faker-js/faker'),
     exec = require('child_process').exec,
     fs = require('fs'),
     EventEmitter = require('events'),
@@ -26,10 +28,10 @@ describe('execute should', () => {
     })
 
     it('run an optional file with signal SIGKILL',async () => {
-        let bootTime = faker.random.number(10000)
-        let filename = faker.random.uuid()
-        let executable = faker.random.uuid()
-        let code = faker.random.uuid()
+        let bootTime = faker.datatype.number(10000)
+        let filename = faker.datatype.uuid()
+        let executable = faker.datatype.uuid()
+        let code = faker.datatype.uuid()
         let childEmitter = new TestEmitter()
         exec.mockReturnValue(childEmitter)
         
@@ -47,10 +49,10 @@ describe('execute should', () => {
     })
     
     it('run an optional file with colde 1',async () => {
-        let bootTime = faker.random.number(10000)
-        let filename = faker.random.uuid()
-        let executable = faker.random.uuid()
-        let signal = faker.random.uuid()
+        let bootTime = faker.datatype.number(10000)
+        let filename = faker.datatype.uuid()
+        let executable = faker.datatype.uuid()
+        let signal = faker.datatype.uuid()
         let childEmitter = new TestEmitter()
         exec.mockReturnValue(childEmitter)
         
@@ -67,11 +69,11 @@ describe('execute should', () => {
     })
     
     it('run an non optional file with any code and signal',async () => {
-        let bootTime = faker.random.number(10000)
-        let filename = faker.random.uuid()
-        let executable = faker.random.uuid()
-        let signal = faker.random.uuid()
-        let code = faker.random.uuid()
+        let bootTime = faker.datatype.number(10000)
+        let filename = faker.datatype.uuid()
+        let executable = faker.datatype.uuid()
+        let signal = faker.datatype.uuid()
+        let code = faker.datatype.uuid()
         let childEmitter = new TestEmitter()
         exec.mockReturnValue(childEmitter)
         
@@ -88,10 +90,10 @@ describe('execute should', () => {
     })
 
     it('timeout should reject and kill process', async () => {
-        let bootTime = faker.random.number(10000)
-        let filename = faker.random.uuid()
-        let executable = faker.random.uuid()
-        let pid = faker.random.uuid()
+        let bootTime = faker.datatype.number(10000)
+        let filename = faker.datatype.uuid()
+        let executable = faker.datatype.uuid()
+        let pid = faker.datatype.uuid()
 
         exec.mockReturnValue({pid: pid, on : jest.fn()})
 

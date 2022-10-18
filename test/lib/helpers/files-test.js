@@ -3,18 +3,18 @@ jest.mock('glob', () => ({
 }))
 const files = require('../../../lib/helpers/files'),
     glob = require('glob'),
-    faker = require('faker')
+    { faker } = require('@faker-js/faker')
 
 describe('get all files should', () => {
     let directories
     
     beforeEach(() => {
-        directories = [faker.random.uuid(), faker.random.uuid()]
+        directories = [faker.datatype.uuid(), faker.datatype.uuid()]
     })
 
     it('return a list of all files recursive',async () => {
-        let fileList1 = [faker.random.uuid(), faker.random.uuid()]
-        let fileList2 = [faker.random.uuid(), faker.random.uuid()]
+        let fileList1 = [faker.datatype.uuid(), faker.datatype.uuid()]
+        let fileList2 = [faker.datatype.uuid(), faker.datatype.uuid()]
         glob.sync.mockReturnValueOnce(fileList1)
         glob.sync.mockReturnValueOnce(fileList2)
 
@@ -28,8 +28,8 @@ describe('get all files should', () => {
     })
 
     it('return a list of all files non recursive',async () => {
-        let fileList1 = [faker.random.uuid(), faker.random.uuid()]
-        let fileList2 = [faker.random.uuid(), faker.random.uuid()]
+        let fileList1 = [faker.datatype.uuid(), faker.datatype.uuid()]
+        let fileList2 = [faker.datatype.uuid(), faker.datatype.uuid()]
         glob.sync.mockReturnValueOnce(fileList1)
         glob.sync.mockReturnValueOnce(fileList2)
 

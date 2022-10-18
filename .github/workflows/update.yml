@@ -11,8 +11,6 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.REPO_TOKEN }}
       - uses: actions/setup-node@master
       - name: install upgrade
         run: yarn upgrade --latest
